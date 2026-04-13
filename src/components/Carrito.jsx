@@ -1,6 +1,7 @@
 export default function Carrito({ cart }) {
     // state derivado
     const isEmpty = () => cart.length === 0
+    const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0)
 
     return (
 
@@ -60,7 +61,7 @@ export default function Carrito({ cart }) {
                                     </tbody>
                                 </table>
 
-                                <p className="text-end">Total pagar: <span className="fw-bold">$899</span></p>
+                                <p className="text-end">Total pagar: <span className="fw-bold">${cartTotal}</span></p>
                                 <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
                                     </div>
                             

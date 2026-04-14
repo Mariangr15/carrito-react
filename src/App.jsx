@@ -44,7 +44,7 @@ function App() {
         console.log('decrementar')
         setCart(prevCart => prevCart.map((guitar) => {
             if (guitar.id === id) {
-                if (guitar.quantity === 1) {
+                if (guitar.quantity > 0) {
                     return guitar
                 }
                 return { ...guitar, quantity: guitar.quantity - 1 }

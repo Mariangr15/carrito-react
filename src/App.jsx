@@ -33,7 +33,7 @@ function App() {
     function incrementQuantity(id) {
         console.log('incrementar')
         setCart(prevCart => prevCart.map((guitar) => {
-            if (guitar.id === id) {
+            if (guitar.id === id && guitar.quantity <  5) {
                 return { ...guitar, quantity: guitar.quantity + 1 }
             }
             return guitar
@@ -43,14 +43,16 @@ function App() {
     function decrementQuantity(id) {
         console.log('decrementar')
         setCart(prevCart => prevCart.map((guitar) => {
-            if (guitar.id === id) {
-                if (guitar.quantity > 0) {
-                    return guitar
-                }
+            if (guitar.id === id && guitar.quantity > 0) {
+
                 return { ...guitar, quantity: guitar.quantity - 1 }
             }
             return guitar
         }))
+    }
+
+    function clearCart() {
+        setCart([])
     }
 
   return (
@@ -60,6 +62,7 @@ function App() {
             removeFromCart = {removeFromCart}
             incrementQuantity = {incrementQuantity}
             decrementQuantity = {decrementQuantity}
+            clearCart = {clearCart}
         />
 
         <main className="container-xl mt-5">

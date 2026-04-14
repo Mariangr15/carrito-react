@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 
-export default function Carrito({ cart, removeFromCart }) {
+export default function Carrito({ cart, removeFromCart, incrementQuantity, decrementQuantity }) {
     // state derivado
     const isEmpty = useMemo(() => cart.length === 0, [cart])
     const cartTotal = useMemo(() => cart.reduce((total, item) => total + item.price * item.quantity, 0), [cart])
@@ -42,6 +42,7 @@ export default function Carrito({ cart, removeFromCart }) {
                                                         <button
                                                             type="button"
                                                             className="btn btn-dark"
+                                                            onClick={()=> decrementQuantity(element.id)}
                                                         >
                                                             -
                                                         </button>
@@ -49,6 +50,7 @@ export default function Carrito({ cart, removeFromCart }) {
                                                         <button
                                                             type="button"
                                                             className="btn btn-dark"
+                                                            onClick={()=> incrementQuantity(element.id)}
                                                         >
                                                             +
                                                         </button>

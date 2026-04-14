@@ -1,7 +1,7 @@
 import Carrito from "./Carrito"
 
 
-function Header({ cart , removeFromCart}) {
+function Header({ cart , removeFromCart, incrementQuantity, decrementQuantity}) {
   return (
     <header className="py-5 header">
         <div className="container-xl">
@@ -15,6 +15,8 @@ function Header({ cart , removeFromCart}) {
                 <Carrito
                     cart = {cart}
                     removeFromCart = {removeFromCart}
+                    incrementQuantity = {incrementQuantity}
+                    decrementQuantity = {decrementQuantity}
                 />
                 
             </div>

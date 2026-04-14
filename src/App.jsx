@@ -7,27 +7,50 @@ import Guitar from './components/Guitar'
 import { db } from './data/db'
 
 function App() {
-  const [data, setData] = useState(db)
-  const [cart, setCart] = useState([])
+    const [data, setData] = useState(db)
+    const [cart, setCart] = useState([])
 
-  function addToCart(item) {
-    const itemExists = cart.findIndex((guitar) => item.id === guitar.id)
+    function addToCart(item) {
+        const itemExists = cart.findIndex((guitar) => item.id === guitar.id)
 
-    if (itemExists !== -1) {
-        const newCart = [...cart]
-        newCart[itemExists].quantity += 1
-        setCart(newCart)
+        if (itemExists !== -1) {
+            const newCart = [...cart]
+            newCart[itemExists].quantity += 1
+            setCart(newCart)
 
-    }else{
-        item.quantity = 1
-        setCart([...cart, item]);
+        }else{
+            item.quantity = 1
+            setCart([...cart, item]);
+        }
+        
     }
-    
-  }
 
-  function removeFromCart(id) {
-    setCart(prevCart => prevCart.filter((guitar) => guitar.id !== id))
-   
+    function removeFromCart(id) {
+        setCart(prevCart => prevCart.filter((guitar) => guitar.id !== id))
+        
+    }
+
+    function incrementQuantity(id) {
+        console.log('incrementar')
+        setCart(prevCart => prevCart.map((guitar) => {
+            if (guitar.id === id) {
+                return { ...guitar, quantity: guitar.quantity + 1 }
+            }
+            return guitar
+        }))
+    }
+
+    function decrementQuantity(id) {
+        console.log('decrementar')
+        setCart(prevCart => prevCart.map((guitar) => {
+            if (guitar.id === id) {
+                if (guitar.quantity === 1) {
+                    return guitar
+                }
+                return { ...guitar, quantity: guitar.quantity - 1 }
+            }
+            return guitar
+        }))
     }
 
   return (
@@ -35,6 +58,8 @@ function App() {
         <Header
             cart = {cart}
             removeFromCart = {removeFromCart}
+            incrementQuantity = {incrementQuantity}
+            decrementQuantity = {decrementQuantity}
         />
 
         <main className="container-xl mt-5">
